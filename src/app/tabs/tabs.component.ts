@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StarWarsService } from 'app/starwars.service';
 
 @Component({
   selector: 'app-tabs',
@@ -6,11 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tabs.component.css']
 })
 export class TabsComponent implements OnInit {
-  charcters = [
-    {name: 'ABC PQR', side: ''},
-    {name: 'XYZ RSt', side: ''},
-
-  ];
+  charcters = [];
   chosenList = 'all';
   constructor() { }
 
@@ -18,14 +15,9 @@ export class TabsComponent implements OnInit {
   }
 
   getCharacters(){
-    if(this.chosenList === 'all'){
-      return this.charcters.slice();
-    }else{
-      let copyCharacters = this.charcters.slice();
-      copyCharacters = this.charcters.filter((char) => char.side === this.chosenList);
-      return copyCharacters;
-    }
-   
+   const swService = new StarWarsService();
+   this.charcters = swService.getCharacters(this.chosenList);
+   return this.charcters;
   }
 
   onChoose(side){
