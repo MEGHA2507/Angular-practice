@@ -33,4 +33,15 @@ export class StarWarsService{
         this.charcters[position].side = char.side;
         this.logService.writeLog(`Change side of ${char.name}, new side: ${char.side}`);
       }
+
+      addCharacter(name, side){
+        const position = this.charcters.findIndex((x) => {
+          return x.name === name;
+        });
+        if(position !== -1){
+        return;
+        }
+        const newChar = {name: name, side:side};
+        this.charcters.push(newChar);
+      }
 }
