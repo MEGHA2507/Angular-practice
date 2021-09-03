@@ -7,15 +7,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ListComponent implements OnInit {
   @Input() characters;
-  @Output() sideEmit = new EventEmitter<{name:string, side:string}>();
+  
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  onSideAssign(charInfo){
-    this.sideEmit.emit(charInfo);
   }
 
 }

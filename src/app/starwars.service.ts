@@ -1,9 +1,18 @@
+import { Injectable } from "@angular/core";
+import { LogService } from "./log.service";
+
+@Injectable()
 export class StarWarsService{
     private  charcters = [
         {name: 'ABC PQR', side: ''},
         {name: 'XYZ RSt', side: ''},
     
       ];
+      private logService: LogService;
+
+      constructor(logService: LogService){
+        this.logService = logService;
+      }
 
       getCharacters(chosenList){
         if(chosenList === 'all'){
@@ -14,5 +23,14 @@ export class StarWarsService{
           return copyCharacters;
         }
        
+      }
+
+      onSideEmit(char){
+        const position = this.charcters.findIndex((x) => {
+          return x.name === char.name;
+        });
+    
+        this.charcters[position].side = char.side;
+        this.logService.writeLog(`Change side of ${char.name}, new side: ${char.side}`);
       }
 }
